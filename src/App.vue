@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <ul>
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/about">About</router-link></li>
-      <li><router-link to="/aboutdsdsd">Not Found</router-link></li>
-    </ul>
+  <HeaderComponent></HeaderComponent>
 
-    <div>
-      <router-view></router-view>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
+
+<script setup>
+  import HeaderComponent from './components/HeaderComponent.vue';
+</script>
