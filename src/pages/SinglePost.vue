@@ -8,19 +8,24 @@
   </div>
 
   <div>
-    <router-link :to="{ name: 'posts' }">Back</router-link>
+    <button @click="onBackClick">Back To Posts</button>
   </div>
 </template>
 <script setup>
   import { ref, watch, watchEffect } from 'vue';
-  import { useRoute } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
   const route = useRoute();
+  const router = useRouter();
 
   const post = ref(null);
 
   const getPost = async () => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${route.params.id}`);
     post.value = await response.json();
+  };
+
+  const onBackClick = () => {
+    router.go(-1);
   };
 
   watchEffect(getPost);
