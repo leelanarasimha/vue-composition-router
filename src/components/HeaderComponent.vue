@@ -21,7 +21,7 @@
           <router-link class="nav-link" to="/about">About</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/posts">Posts</router-link>
+          <router-link class="nav-link" :to="{ name: 'posts' }">Posts</router-link>
         </li>
       </ul>
     </div>

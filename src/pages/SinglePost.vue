@@ -8,7 +8,7 @@
   </div>
 
   <div>
-    <router-link to="/posts">Back</router-link>
+    <router-link :to="{ name: 'posts' }">Back</router-link>
   </div>
 </template>
 <script setup>
