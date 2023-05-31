@@ -12,10 +12,10 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 const routes = [
   { path: '/', component: Home },
   { path: '/about', component: About },
-  { path: '/posts', component: Posts },
+  { path: '/posts', component: Posts, children: [{ path: ':id', component: SinglePost }] },
   { path: '/:productName+', component: ProductComponent },
   { path: '/:id(\\d+)', component: SinglePost },
-  { path: '/posts/:id', component: SinglePost },
+
   { path: '/:pathMatch(.*)', component: NotFound }
 ];
 

@@ -12,7 +12,7 @@
   </div>
 </template>
 <script setup>
-  import { ref } from 'vue';
+  import { ref, watch, watchEffect } from 'vue';
   import { useRoute } from 'vue-router';
   const route = useRoute();
 
@@ -23,5 +23,5 @@
     post.value = await response.json();
   };
 
-  getPost();
+  watchEffect(getPost);
 </script>
