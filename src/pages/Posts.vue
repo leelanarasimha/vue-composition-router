@@ -19,7 +19,7 @@
             <td>{{ post.title }}</td>
             <td>{{ post.body }}</td>
             <td>
-              <router-link :to="{ name: 'articles', params: { id: post.id } }">View Post</router-link>
+              <router-link :to="{ name: 'posts', params: { id: post.id } }">View Post</router-link>
             </td>
           </tr>
         </tbody>
