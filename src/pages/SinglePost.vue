@@ -17,10 +17,16 @@
   const route = useRoute();
   const router = useRouter();
 
+  const props = defineProps({
+    id: String
+  });
+  console.log(props);
+  console.log(route.params);
+
   const post = ref(null);
 
   const getPost = async () => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${route.params.id}`);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${props.id}`);
     post.value = await response.json();
   };
 
