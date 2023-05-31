@@ -3,9 +3,13 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <router-view name="LeftSideBar" class="col-md-2"></router-view>
+
+      <div class="col">
         <router-view></router-view>
       </div>
+
+      <router-view name="RightSideBar" class="col-md-2"></router-view>
     </div>
   </div>
 </template>

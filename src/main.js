@@ -4,14 +4,30 @@ import Home from './pages/Home.vue';
 import About from './pages/About.vue';
 import Posts from './pages/Posts.vue';
 import SinglePost from './pages/SinglePost.vue';
+import LeftSideBar from './components/LeftSideBar.vue';
+import RightSideBar from './components/RightSideBar.vue';
 import PostComponent from './pages/PostComponent.vue';
 import ProductComponent from './pages/ProductComponent.vue';
 import NotFound from './pages/NotFound.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/about', component: About },
+  {
+    path: '/',
+    components: {
+      default: Home,
+      LeftSideBar: About,
+      RightSideBar
+    }
+  },
+  {
+    path: '/about',
+    components: {
+      default: About,
+      RightSideBar: LeftSideBar,
+      LeftSideBar: RightSideBar
+    }
+  },
   {
     path: '/articles',
     name: 'posts',
