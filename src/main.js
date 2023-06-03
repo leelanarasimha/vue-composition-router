@@ -59,9 +59,15 @@ function authAccess(to) {
 }
 
 router.beforeEach(async (to, from, next) => {
-  const hasAccess = await authAccess(to);
-  if (!hasAccess) next({ path: '/notfound' });
-  else next(true);
+  next(true);
+});
+
+router.beforeResolve(async (to) => {
+  if (to.path === '/articles') {
+    await authAccess(to);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
+    app.provide('postsData', await response.json());
+  }
 });
 
 const app = createApp(App);
