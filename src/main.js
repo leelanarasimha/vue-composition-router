@@ -15,7 +15,8 @@ const routes = [
   {
     path: '/',
     component: Home,
-    props: { name: 'Leela web dev' }
+    props: { name: 'Leela web dev' },
+    beforeEnter: [auth1, auth2]
   },
   {
     path: '/about',
@@ -39,6 +40,16 @@ const routes = [
   { path: '/:pathMatch(.*)', component: NotFound }
 ];
 
+function auth1(to, from) {
+  console.log('auth1');
+  return false;
+}
+
+function auth2() {
+  console.log('auth2');
+  return true;
+}
+
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
@@ -54,17 +65,23 @@ function authAccess(to) {
       } else {
         resolve(false);
       }
-    }, 2000);
+    }, 500);
   });
 }
 
 router.beforeEach(async (to, from, next) => {
+  console.log('beforeEach');
   next(true);
 });
 
+router.afterEach((to, from) => {
+  console.log('after Each ');
+});
+
 router.beforeResolve(async (to) => {
+  console.log('before Resolve');
   if (to.path === '/articles') {
-    await authAccess(to);
+    // await authAccess(to);
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
     app.provide('postsData', await response.json());
   }
