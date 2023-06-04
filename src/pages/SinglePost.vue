@@ -13,7 +13,7 @@
 </template>
 <script setup>
   import { ref, watch, watchEffect } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
+  import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
   const route = useRoute();
   const router = useRouter();
 
@@ -25,14 +25,17 @@
 
   const post = ref(null);
 
-  const getPost = async () => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${props.id}`);
+  const getPost = async (id) => {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
     post.value = await response.json();
   };
+
+  getPost(props.id);
+  onBeforeRouteUpdate((to, from) => {
+    getPost(to.params.id);
+  });
 
   const onBackClick = () => {
     router.go(-1);
   };
-
-  watchEffect(getPost);
 </script>

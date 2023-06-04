@@ -33,13 +33,16 @@
 
 <script setup>
   import { inject, onMounted, ref } from 'vue';
-  import { useRouter } from 'vue-router';
+  import { onBeforeRouteLeave, useRouter } from 'vue-router';
 
   const router = useRouter();
   const posts = ref([]);
 
   onMounted(() => {
     posts.value = inject('postsData');
+  });
+  onBeforeRouteLeave((to, from) => {
+    console.log('on Before Route Leave');
   });
 
   const fetchPosts = async () => {
