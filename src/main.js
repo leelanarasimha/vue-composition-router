@@ -10,6 +10,7 @@ import SearchUser from './pages/SearchUser.vue';
 import ProductComponent from './pages/ProductComponent.vue';
 import NotFound from './pages/NotFound.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
+import { createPinia } from 'pinia';
 
 const routes = [
   {
@@ -87,6 +88,8 @@ router.beforeResolve(async (to) => {
   }
 });
 
+const pinia = createPinia();
 const app = createApp(App);
 app.use(router);
+app.use(pinia);
 app.mount('#app');
