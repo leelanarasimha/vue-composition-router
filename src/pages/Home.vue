@@ -1,6 +1,7 @@
 <template>
   <div>Home Page</div>
   <div>Counter: {{ counter.count }}</div>
+  <div>doubleCOunt: {{ counter.doubleCount }}</div>
   <div>
     <button @click="counter.increment()">Increment</button>
   </div>
