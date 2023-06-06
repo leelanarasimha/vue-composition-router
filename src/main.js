@@ -16,7 +16,7 @@ const routes = [
   {
     path: '/',
     component: Home,
-    props: { name: 'Leela web dev' },
+
     beforeEnter: [auth1, auth2]
   },
   {

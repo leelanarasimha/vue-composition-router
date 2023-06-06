@@ -1,29 +1,30 @@
 <template>
   <div>Home Page</div>
   <div>Counter: {{ count }}</div>
-  <div>doubleCOunt: {{ doubleCount }}</div>
+  <div>doubleCount: {{ doubleCount }}</div>
+  <!-- <div>doubleValue: {{ doubleValue }}</div> -->
   <div>
-    <button @click="increment()">Increment</button>
+    <button @click="add()">Increment</button>
   </div>
 </template>
 
-<script setup>
-  import { storeToRefs } from 'pinia';
-  import { computed } from 'vue';
+<script>
+  import { mapActions, mapState, mapWritableState } from 'pinia';
   import { useCounterStore } from '../stores/counter';
-
-  const props = defineProps(['name']);
-  const counter = useCounterStore();
-
-  // const count = counter.count;
-  // const doubleCount = counter.doubleCOunt;
-  // const {count, doubleCount} = counter;
-
-  // const {count, doubleCount} = storeToRefs(counter);
-  const count = computed(() => counter.count);
-  const doubleCount = computed(() => counter.doubleCount);
-
-  const { increment } = counter;
-
-  console.log(props);
+  export default {
+    computed: {
+      // ...mapState(useCounterStore, {
+      //   counter: 'count',
+      //   doubleCounter: 'doubleCount',
+      //   doubleValue: (state) => state.doubleCount + 1
+      // }),
+      ...mapWritableState(useCounterStore, ['count', 'doubleCount'])
+    },
+    methods: {
+      ...mapActions(useCounterStore, ['increment']),
+      add() {
+        this.count++;
+      }
+    }
+  };
 </script>
