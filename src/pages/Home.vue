@@ -6,35 +6,31 @@
   <!-- <div>doubleValue: {{ doubleValue }}</div> -->
   <div>
     <button @click="add()">Increment</button>
-    <button @click="$reset()">Reset</button>
+    <button @click="counter.$reset()">Reset</button>
   </div>
 </template>
 
-<script>
-  import { mapActions, mapState, mapWritableState } from 'pinia';
+<script setup>
+  import { storeToRefs } from 'pinia';
   import { useCounterStore } from '../stores/counter';
-  export default {
-    computed: {
-      // ...mapState(useCounterStore, {
-      //   counter: 'count',
-      //   doubleCounter: 'doubleCount',
-      //   doubleValue: (state) => state.doubleCount + 1
-      // }),
-      ...mapWritableState(useCounterStore, ['count', 'doubleCount', 'name'])
-    },
-    mounted() {
-      this.$subscribe((mutation, state) => {
-        console.log(mutation), console.log(state);
-      });
-    },
-    methods: {
-      ...mapActions(useCounterStore, ['increment', '$reset', '$patch', '$subscribe']),
-      add() {
-        this.$patch({
-          count: this.count + 1,
-          name: Math.random() + 'dsds'
-        });
-      }
-    }
-  };
+
+  const counter = useCounterStore();
+
+  const { count, doubleCount, name } = storeToRefs(counter);
+
+  const { increment } = counter;
+
+  counter.$subscribe((mutation, state) => {
+    console.log(mutation);
+    console.log(state);
+  });
+
+  function add() {
+    counter.$patch({
+      count: counter.count + 1,
+      name: Math.random() + 'dsds'
+    });
+    // counter.count++;
+    // counter.name = Math.random() + 'dsds';
+  }
 </script>
