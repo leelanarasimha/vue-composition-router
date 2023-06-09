@@ -2,6 +2,8 @@
   <div>Home Page</div>
   <div>Counter: {{ count }}</div>
   <div>doubleCount: {{ doubleCount }}</div>
+  <div>doubleCountPlusOne: {{ doubleCountPlusOne(3) }}</div>
+  <div>User with 1: {{ getUserById(1).name }}</div>
   <div>Name: {{ name }}</div>
   <!-- <div>doubleValue: {{ doubleValue }}</div> -->
   <div>
@@ -16,7 +18,7 @@
 
   const counter = useCounterStore();
 
-  const { count, doubleCount, name } = storeToRefs(counter);
+  const { count, doubleCount, name, doubleCountPlusOne, getUserById } = storeToRefs(counter);
 
   const { increment } = counter;
 
